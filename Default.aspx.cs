@@ -37,6 +37,7 @@ namespace Admin_MRLoca
                 if(admin != null)
                 {
                     Session["Admin"] = admin;
+                    Response.Redirect("AdminHome.aspx");
                 }
             }
         }
