@@ -17,5 +17,7 @@ namespace Admin_MRLoca
         public int IdAdmin { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string NomAdmin { get; set; }
+        public string PrenomAdmin { get; set; }
     }
 }

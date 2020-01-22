@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MRLocaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MRLocaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="IdAdmin" />
@@ -12,6 +12,8 @@
           <Property Name="IdAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomAdmin" Type="varchar" MaxLength="50" />
+          <Property Name="PrenomAdmin" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Adresse">
           <Key>
@@ -558,8 +560,7 @@
             <End Role="Saison" EntitySet="Saison" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MRLocaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -570,6 +571,8 @@
           <Property Name="IdAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomAdmin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrenomAdmin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Adresse">
           <Key>
@@ -992,7 +995,7 @@
             <Parameter Name="definition" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sp_DelAdresse">
-            <Parameter Name="IdAdresse" Mode="In" Type="Int32" />
+          <Parameter Name="IdAdresse" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_DelFavori">
             <Parameter Name="Client" Mode="In" Type="Int32" />
@@ -1003,10 +1006,10 @@
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetAdresse" ReturnType="Collection(MRLocaModel.sp_GetAdresse_Result)">
-            <Parameter Name="IdAdresse" Mode="In" Type="Int32" />
+          <Parameter Name="IdAdresse" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetAdressesClient" ReturnType="Collection(MRLocaModel.sp_GetAdressesClient_Result)">
-            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          <Parameter Name="IdClient" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetAllHebergements" ReturnType="Collection(MRLocaModel.sp_GetAllHebergements_Result)" />
           <FunctionImport Name="sp_getClient" ReturnType="Collection(MRLocaModel.sp_getClient_Result)">
@@ -1014,26 +1017,26 @@
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetCommande" ReturnType="Collection(MRLocaModel.sp_GetCommande_Result)">
-            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          <Parameter Name="IdClient" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetFavoris" ReturnType="Collection(MRLocaModel.sp_GetFavoris_Result)">
-            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          <Parameter Name="IdClient" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetHebergement" ReturnType="Collection(MRLocaModel.sp_GetHebergement_Result)">
-            <Parameter Name="IdHebergement" Mode="In" Type="Int32" />
+          <Parameter Name="IdHebergement" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetHebergementProprietaire" ReturnType="Collection(MRLocaModel.sp_GetHebergementProprietaire_Result)">
-            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          <Parameter Name="IdClient" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetHebergementRecherche" ReturnType="Collection(MRLocaModel.sp_GetHebergementRecherche_Result)">
             <Parameter Name="Departement" Mode="In" Type="String" />
             <Parameter Name="Type" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetMessagesClient" ReturnType="Collection(MRLocaModel.sp_GetMessagesClient_Result)">
-            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          <Parameter Name="IdClient" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetUtilisateurId" ReturnType="Collection(MRLocaModel.sp_GetUtilisateurId_Result)">
-            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          <Parameter Name="IdClient" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MRLocaModel.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -1311,6 +1314,8 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="MRLocaModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="PrenomAdmin" ColumnName="PrenomAdmin" />
+                <ScalarProperty Name="NomAdmin" ColumnName="NomAdmin" />
                 <ScalarProperty Name="IdAdmin" ColumnName="IdAdmin" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
