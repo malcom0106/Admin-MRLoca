@@ -1,0 +1,1767 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MRLocaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdAdmin" />
+          </Key>
+          <Property Name="IdAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="IdAdresse" />
+          </Key>
+          <Property Name="IdAdresse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" />
+          <Property Name="Numero" Type="varchar" MaxLength="10" />
+          <Property Name="Voie" Type="varchar" MaxLength="50" />
+          <Property Name="CodePostal" Type="varchar" MaxLength="8" />
+          <Property Name="Ville" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Avi">
+          <Key>
+            <PropertyRef Name="IdAvis" />
+          </Key>
+          <Property Name="IdAvis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdHebergement" Type="int" Nullable="false" />
+          <Property Name="Note" Type="int" Nullable="false" />
+          <Property Name="Commentaire" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Type" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientAdresse">
+          <Key>
+            <PropertyRef Name="IdClient" />
+            <PropertyRef Name="IdAdresse" />
+          </Key>
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdAdresse" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departement">
+          <Key>
+            <PropertyRef Name="IdDepartement" />
+          </Key>
+          <Property Name="IdDepartement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Departement_code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Departement_nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Departement_nom_uppercase" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DispoHeberg">
+          <Key>
+            <PropertyRef Name="IdDispo" />
+          </Key>
+          <Property Name="IdDispo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdHebergement" Type="int" Nullable="false" />
+          <Property Name="DateDebut" Type="datetime" Nullable="false" />
+          <Property Name="DateFin" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Favori">
+          <Key>
+            <PropertyRef Name="IdClient" />
+            <PropertyRef Name="IdHebergement" />
+          </Key>
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdHebergement" Type="int" Nullable="false" />
+          <Property Name="Commentaire" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Hebergement">
+          <Key>
+            <PropertyRef Name="IdHebergement" />
+          </Key>
+          <Property Name="IdHebergement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdAdresse" Type="int" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Etat" Type="bit" />
+        </EntityType>
+        <EntityType Name="LogSQL">
+          <Key>
+            <PropertyRef Name="IdLogSQL" />
+          </Key>
+          <Property Name="IdLogSQL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateInsert" Type="datetime" Nullable="false" />
+          <Property Name="Error" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messagerie">
+          <Key>
+            <PropertyRef Name="IdMessagerie" />
+          </Key>
+          <Property Name="IdMessagerie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdExpediteur" Type="int" Nullable="false" />
+          <Property Name="IdDestinataire" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Statut" Type="bit" Nullable="false" />
+          <Property Name="IdHebergement" Type="int" />
+          <Property Name="Sujet" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ModePaiement">
+          <Key>
+            <PropertyRef Name="IdModePaiement" />
+          </Key>
+          <Property Name="IdModePaiement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomModePaiement" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Statut" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="IdReservation" />
+          </Key>
+          <Property Name="IdReservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdHebergement" Type="int" Nullable="false" />
+          <Property Name="DateReservation" Type="datetime" Nullable="false" />
+          <Property Name="DateDebut" Type="datetime" Nullable="false" />
+          <Property Name="DateFin" Type="datetime" Nullable="false" />
+          <Property Name="Statut" Type="bit" />
+          <Property Name="PrixTotal" Type="varchar" MaxLength="50" />
+          <Property Name="ModePaiement" Type="int" />
+        </EntityType>
+        <EntityType Name="Saison">
+          <Key>
+            <PropertyRef Name="IdSaison" />
+          </Key>
+          <Property Name="IdSaison" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdHebergement" Type="int" Nullable="false" />
+          <Property Name="DateDebut" Type="datetime" Nullable="false" />
+          <Property Name="DateFin" Type="datetime" Nullable="false" />
+          <Property Name="Prix" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeLgt">
+          <Key>
+            <PropertyRef Name="idTypeLgt" />
+          </Key>
+          <Property Name="idTypeLgt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomLgt" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Avis_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Avi" Type="Self.Avi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Avi">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Avis_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Avi" Type="Self.Avi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Avi">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientAdresse_Adresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="1" />
+          <End Role="ClientAdresse" Type="Self.ClientAdresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="IdAdresse" />
+            </Principal>
+            <Dependent Role="ClientAdresse">
+              <PropertyRef Name="IdAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientAdresse_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientAdresse" Type="Self.ClientAdresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="ClientAdresse">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DispoHeberg_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="DispoHeberg" Type="Self.DispoHeberg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="DispoHeberg">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favori_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Favori" Type="Self.Favori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Favori">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favori_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Favori" Type="Self.Favori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Favori">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hebergement_Adresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="0..1" />
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="IdAdresse" />
+            </Principal>
+            <Dependent Role="Hebergement">
+              <PropertyRef Name="IdAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hebergement_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Hebergement">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hebergement_TypeLgt">
+          <End Role="TypeLgt" Type="Self.TypeLgt" Multiplicity="1" />
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLgt">
+              <PropertyRef Name="idTypeLgt" />
+            </Principal>
+            <Dependent Role="Hebergement">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messagerie_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="IdExpediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messagerie_Client1">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="IdDestinataire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Saison_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Saison" Type="Self.Saison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Saison">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_AddFavori" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+          <Parameter Name="IdHebergement" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_DelAdresse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAdresse" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DelFavori" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Client" Type="int" Mode="In" />
+          <Parameter Name="IdHebergement" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetAdresse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAdresse" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetAdressesClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetAllHebergements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_getClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetCommande" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetFavoris" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetHebergement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdHebergement" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetHebergementProprietaire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetHebergementRecherche" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Departement" Type="varchar" Mode="In" />
+          <Parameter Name="Type" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetMessagesClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetUtilisateurId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertAdresse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+          <Parameter Name="NomAdresse" Type="varchar" Mode="In" />
+          <Parameter Name="Numero" Type="varchar" Mode="In" />
+          <Parameter Name="Voie" Type="varchar" Mode="In" />
+          <Parameter Name="CodePostal" Type="varchar" Mode="In" />
+          <Parameter Name="Ville" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdExpediteur" Type="int" Mode="In" />
+          <Parameter Name="IdDestinataire" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_setAdresse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="numero" Type="varchar" Mode="In" />
+          <Parameter Name="voie" Type="varchar" Mode="In" />
+          <Parameter Name="codepostal" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_setClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="login" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="telephone" Type="varchar" Mode="In" />
+          <Parameter Name="type" Type="bit" Mode="In" />
+          <Parameter Name="nomAdresse" Type="varchar" Mode="In" />
+          <Parameter Name="numero" Type="varchar" Mode="In" />
+          <Parameter Name="voie" Type="varchar" Mode="In" />
+          <Parameter Name="codepostal" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SetReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+          <Parameter Name="IdHebergement" Type="int" Mode="In" />
+          <Parameter Name="DateDebut" Type="datetime" Mode="In" />
+          <Parameter Name="DateFin" Type="datetime" Mode="In" />
+          <Parameter Name="Statut" Type="bit" Mode="In" />
+          <Parameter Name="PrixTotal" Type="varchar" Mode="In" />
+          <Parameter Name="ModePaiement" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateAdresse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAdresse" Type="int" Mode="In" />
+          <Parameter Name="NomAdresse" Type="varchar" Mode="In" />
+          <Parameter Name="Numero" Type="varchar" Mode="In" />
+          <Parameter Name="Voie" Type="varchar" Mode="In" />
+          <Parameter Name="CodePostal" Type="varchar" Mode="In" />
+          <Parameter Name="Ville" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdClient" Type="int" Mode="In" />
+          <Parameter Name="Nom" Type="varchar" Mode="In" />
+          <Parameter Name="Prenom" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Telephone" Type="varchar" Mode="In" />
+          <Parameter Name="Type" Type="bit" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="MRLocaModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Adresse" EntityType="Self.Adresse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Avi" EntityType="Self.Avi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientAdresse" EntityType="Self.ClientAdresse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departement" EntityType="Self.Departement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DispoHeberg" EntityType="Self.DispoHeberg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favori" EntityType="Self.Favori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hebergement" EntityType="Self.Hebergement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogSQL" EntityType="Self.LogSQL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messagerie" EntityType="Self.Messagerie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModePaiement" EntityType="Self.ModePaiement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Saison" EntityType="Self.Saison" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeLgt" EntityType="Self.TypeLgt" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Avis_Client" Association="Self.FK_Avis_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Avi" EntitySet="Avi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Avis_Hebergement" Association="Self.FK_Avis_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergement" />
+            <End Role="Avi" EntitySet="Avi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientAdresse_Adresse" Association="Self.FK_ClientAdresse_Adresse">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="ClientAdresse" EntitySet="ClientAdresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientAdresse_Client" Association="Self.FK_ClientAdresse_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientAdresse" EntitySet="ClientAdresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DispoHeberg_Hebergement" Association="Self.FK_DispoHeberg_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergement" />
+            <End Role="DispoHeberg" EntitySet="DispoHeberg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favori_Client" Association="Self.FK_Favori_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Favori" EntitySet="Favori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favori_Hebergement" Association="Self.FK_Favori_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergement" />
+            <End Role="Favori" EntitySet="Favori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hebergement_Adresse" Association="Self.FK_Hebergement_Adresse">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="Hebergement" EntitySet="Hebergement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hebergement_Client" Association="Self.FK_Hebergement_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Hebergement" EntitySet="Hebergement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hebergement_TypeLgt" Association="Self.FK_Hebergement_TypeLgt">
+            <End Role="TypeLgt" EntitySet="TypeLgt" />
+            <End Role="Hebergement" EntitySet="Hebergement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Client" Association="Self.FK_Messagerie_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Messagerie" EntitySet="Messagerie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Client1" Association="Self.FK_Messagerie_Client1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Messagerie" EntitySet="Messagerie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Client" Association="Self.FK_Reservation_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Hebergement" Association="Self.FK_Reservation_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergement" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Saison_Hebergement" Association="Self.FK_Saison_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergement" />
+            <End Role="Saison" EntitySet="Saison" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MRLocaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdAdmin" />
+          </Key>
+          <Property Name="IdAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="IdAdresse" />
+          </Key>
+          <Property Name="IdAdresse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Numero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Voie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodePostal" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Ville" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Hebergements" Relationship="Self.FK_Hebergement_Adresse" FromRole="Adresse" ToRole="Hebergement" />
+          <NavigationProperty Name="Clients" Relationship="Self.ClientAdresse" FromRole="Adresse" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Avi">
+          <Key>
+            <PropertyRef Name="IdAvis" />
+          </Key>
+          <Property Name="IdAvis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdHebergement" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="Int32" Nullable="false" />
+          <Property Name="Commentaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Avis_Client" FromRole="Avi" ToRole="Client" />
+          <NavigationProperty Name="Hebergement" Relationship="Self.FK_Avis_Hebergement" FromRole="Avi" ToRole="Hebergement" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Avis" Relationship="Self.FK_Avis_Client" FromRole="Client" ToRole="Avi" />
+          <NavigationProperty Name="Favoris" Relationship="Self.FK_Favori_Client" FromRole="Client" ToRole="Favori" />
+          <NavigationProperty Name="Hebergements" Relationship="Self.FK_Hebergement_Client" FromRole="Client" ToRole="Hebergement" />
+          <NavigationProperty Name="Messageries" Relationship="Self.FK_Messagerie_Client" FromRole="Client" ToRole="Messagerie" />
+          <NavigationProperty Name="Messageries1" Relationship="Self.FK_Messagerie_Client1" FromRole="Client" ToRole="Messagerie" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Client" FromRole="Client" ToRole="Reservation" />
+          <NavigationProperty Name="Adresses" Relationship="Self.ClientAdresse" FromRole="Client" ToRole="Adresse" />
+        </EntityType>
+        <EntityType Name="Departement">
+          <Key>
+            <PropertyRef Name="IdDepartement" />
+          </Key>
+          <Property Name="IdDepartement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Departement_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Departement_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Departement_nom_uppercase" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DispoHeberg">
+          <Key>
+            <PropertyRef Name="IdDispo" />
+          </Key>
+          <Property Name="IdDispo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdHebergement" Type="Int32" Nullable="false" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateFin" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Hebergement" Relationship="Self.FK_DispoHeberg_Hebergement" FromRole="DispoHeberg" ToRole="Hebergement" />
+        </EntityType>
+        <EntityType Name="Favori">
+          <Key>
+            <PropertyRef Name="IdClient" />
+            <PropertyRef Name="IdHebergement" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdHebergement" Type="Int32" Nullable="false" />
+          <Property Name="Commentaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Favori_Client" FromRole="Favori" ToRole="Client" />
+          <NavigationProperty Name="Hebergement" Relationship="Self.FK_Favori_Hebergement" FromRole="Favori" ToRole="Hebergement" />
+        </EntityType>
+        <EntityType Name="Hebergement">
+          <Key>
+            <PropertyRef Name="IdHebergement" />
+          </Key>
+          <Property Name="IdHebergement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdAdresse" Type="Int32" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Etat" Type="Boolean" />
+          <NavigationProperty Name="Adresse" Relationship="Self.FK_Hebergement_Adresse" FromRole="Hebergement" ToRole="Adresse" />
+          <NavigationProperty Name="Avis" Relationship="Self.FK_Avis_Hebergement" FromRole="Hebergement" ToRole="Avi" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Hebergement_Client" FromRole="Hebergement" ToRole="Client" />
+          <NavigationProperty Name="DispoHebergs" Relationship="Self.FK_DispoHeberg_Hebergement" FromRole="Hebergement" ToRole="DispoHeberg" />
+          <NavigationProperty Name="Favoris" Relationship="Self.FK_Favori_Hebergement" FromRole="Hebergement" ToRole="Favori" />
+          <NavigationProperty Name="TypeLgt" Relationship="Self.FK_Hebergement_TypeLgt" FromRole="Hebergement" ToRole="TypeLgt" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Hebergement" FromRole="Hebergement" ToRole="Reservation" />
+          <NavigationProperty Name="Saisons" Relationship="Self.FK_Saison_Hebergement" FromRole="Hebergement" ToRole="Saison" />
+        </EntityType>
+        <EntityType Name="LogSQL">
+          <Key>
+            <PropertyRef Name="IdLogSQL" />
+          </Key>
+          <Property Name="IdLogSQL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateInsert" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messagerie">
+          <Key>
+            <PropertyRef Name="IdMessagerie" />
+          </Key>
+          <Property Name="IdMessagerie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdExpediteur" Type="Int32" Nullable="false" />
+          <Property Name="IdDestinataire" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Statut" Type="Boolean" Nullable="false" />
+          <Property Name="IdHebergement" Type="Int32" />
+          <Property Name="Sujet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Messagerie_Client" FromRole="Messagerie" ToRole="Client" />
+          <NavigationProperty Name="Client1" Relationship="Self.FK_Messagerie_Client1" FromRole="Messagerie" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="ModePaiement">
+          <Key>
+            <PropertyRef Name="IdModePaiement" />
+          </Key>
+          <Property Name="IdModePaiement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomModePaiement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Statut" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="IdReservation" />
+          </Key>
+          <Property Name="IdReservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdHebergement" Type="Int32" Nullable="false" />
+          <Property Name="DateReservation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Statut" Type="Boolean" />
+          <Property Name="PrixTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModePaiement" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Reservation_Client" FromRole="Reservation" ToRole="Client" />
+          <NavigationProperty Name="Hebergement" Relationship="Self.FK_Reservation_Hebergement" FromRole="Reservation" ToRole="Hebergement" />
+        </EntityType>
+        <EntityType Name="Saison">
+          <Key>
+            <PropertyRef Name="IdSaison" />
+          </Key>
+          <Property Name="IdSaison" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdHebergement" Type="Int32" Nullable="false" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Prix" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Hebergement" Relationship="Self.FK_Saison_Hebergement" FromRole="Saison" ToRole="Hebergement" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeLgt">
+          <Key>
+            <PropertyRef Name="idTypeLgt" />
+          </Key>
+          <Property Name="idTypeLgt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomLgt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Hebergements" Relationship="Self.FK_Hebergement_TypeLgt" FromRole="TypeLgt" ToRole="Hebergement" />
+        </EntityType>
+        <Association Name="FK_Hebergement_Adresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="0..1" />
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="IdAdresse" />
+            </Principal>
+            <Dependent Role="Hebergement">
+              <PropertyRef Name="IdAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Avis_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Avi" Type="Self.Avi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Avi">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Avis_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Avi" Type="Self.Avi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Avi">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favori_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Favori" Type="Self.Favori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Favori">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hebergement_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Hebergement">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messagerie_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="IdExpediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messagerie_Client1">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="IdDestinataire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DispoHeberg_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="DispoHeberg" Type="Self.DispoHeberg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="DispoHeberg">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favori_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Favori" Type="Self.Favori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Favori">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hebergement_TypeLgt">
+          <End Role="TypeLgt" Type="Self.TypeLgt" Multiplicity="1" />
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLgt">
+              <PropertyRef Name="idTypeLgt" />
+            </Principal>
+            <Dependent Role="Hebergement">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Saison_Hebergement">
+          <End Role="Hebergement" Type="Self.Hebergement" Multiplicity="1" />
+          <End Role="Saison" Type="Self.Saison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hebergement">
+              <PropertyRef Name="IdHebergement" />
+            </Principal>
+            <Dependent Role="Saison">
+              <PropertyRef Name="IdHebergement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClientAdresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MRLocaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Adresses" EntityType="Self.Adresse" />
+          <EntitySet Name="Avis" EntityType="Self.Avi" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Departements" EntityType="Self.Departement" />
+          <EntitySet Name="DispoHebergs" EntityType="Self.DispoHeberg" />
+          <EntitySet Name="Favoris" EntityType="Self.Favori" />
+          <EntitySet Name="Hebergements" EntityType="Self.Hebergement" />
+          <EntitySet Name="LogSQLs" EntityType="Self.LogSQL" />
+          <EntitySet Name="Messageries" EntityType="Self.Messagerie" />
+          <EntitySet Name="ModePaiements" EntityType="Self.ModePaiement" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Saisons" EntityType="Self.Saison" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TypeLgts" EntityType="Self.TypeLgt" />
+          <AssociationSet Name="FK_Hebergement_Adresse" Association="Self.FK_Hebergement_Adresse">
+            <End Role="Adresse" EntitySet="Adresses" />
+            <End Role="Hebergement" EntitySet="Hebergements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Avis_Client" Association="Self.FK_Avis_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Avi" EntitySet="Avis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Avis_Hebergement" Association="Self.FK_Avis_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergements" />
+            <End Role="Avi" EntitySet="Avis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favori_Client" Association="Self.FK_Favori_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Favori" EntitySet="Favoris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hebergement_Client" Association="Self.FK_Hebergement_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Hebergement" EntitySet="Hebergements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Client" Association="Self.FK_Messagerie_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Messagerie" EntitySet="Messageries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Client1" Association="Self.FK_Messagerie_Client1">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Messagerie" EntitySet="Messageries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Client" Association="Self.FK_Reservation_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DispoHeberg_Hebergement" Association="Self.FK_DispoHeberg_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergements" />
+            <End Role="DispoHeberg" EntitySet="DispoHebergs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favori_Hebergement" Association="Self.FK_Favori_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergements" />
+            <End Role="Favori" EntitySet="Favoris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hebergement_TypeLgt" Association="Self.FK_Hebergement_TypeLgt">
+            <End Role="TypeLgt" EntitySet="TypeLgts" />
+            <End Role="Hebergement" EntitySet="Hebergements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Hebergement" Association="Self.FK_Reservation_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergements" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Saison_Hebergement" Association="Self.FK_Saison_Hebergement">
+            <End Role="Hebergement" EntitySet="Hebergements" />
+            <End Role="Saison" EntitySet="Saisons" />
+          </AssociationSet>
+          <AssociationSet Name="ClientAdresse" Association="Self.ClientAdresse">
+            <End Role="Adresse" EntitySet="Adresses" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <FunctionImport Name="sp_AddFavori">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+            <Parameter Name="IdHebergement" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DelAdresse">
+            <Parameter Name="IdAdresse" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DelFavori">
+            <Parameter Name="Client" Mode="In" Type="Int32" />
+            <Parameter Name="IdHebergement" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetAdresse" ReturnType="Collection(MRLocaModel.sp_GetAdresse_Result)">
+            <Parameter Name="IdAdresse" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetAdressesClient" ReturnType="Collection(MRLocaModel.sp_GetAdressesClient_Result)">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetAllHebergements" ReturnType="Collection(MRLocaModel.sp_GetAllHebergements_Result)" />
+          <FunctionImport Name="sp_getClient" ReturnType="Collection(MRLocaModel.sp_getClient_Result)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetCommande" ReturnType="Collection(MRLocaModel.sp_GetCommande_Result)">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetFavoris" ReturnType="Collection(MRLocaModel.sp_GetFavoris_Result)">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetHebergement" ReturnType="Collection(MRLocaModel.sp_GetHebergement_Result)">
+            <Parameter Name="IdHebergement" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetHebergementProprietaire" ReturnType="Collection(MRLocaModel.sp_GetHebergementProprietaire_Result)">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetHebergementRecherche" ReturnType="Collection(MRLocaModel.sp_GetHebergementRecherche_Result)">
+            <Parameter Name="Departement" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetMessagesClient" ReturnType="Collection(MRLocaModel.sp_GetMessagesClient_Result)">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetUtilisateurId" ReturnType="Collection(MRLocaModel.sp_GetUtilisateurId_Result)">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MRLocaModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MRLocaModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertAdresse">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+            <Parameter Name="NomAdresse" Mode="In" Type="String" />
+            <Parameter Name="Numero" Mode="In" Type="String" />
+            <Parameter Name="Voie" Mode="In" Type="String" />
+            <Parameter Name="CodePostal" Mode="In" Type="String" />
+            <Parameter Name="Ville" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertMessage">
+            <Parameter Name="IdExpediteur" Mode="In" Type="Int32" />
+            <Parameter Name="IdDestinataire" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_setAdresse" ReturnType="Collection(Int32)">
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="numero" Mode="In" Type="String" />
+            <Parameter Name="voie" Mode="In" Type="String" />
+            <Parameter Name="codepostal" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_setClient">
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="telephone" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="Boolean" />
+            <Parameter Name="nomAdresse" Mode="In" Type="String" />
+            <Parameter Name="numero" Mode="In" Type="String" />
+            <Parameter Name="voie" Mode="In" Type="String" />
+            <Parameter Name="codepostal" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SetReservation">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+            <Parameter Name="IdHebergement" Mode="In" Type="Int32" />
+            <Parameter Name="DateDebut" Mode="In" Type="DateTime" />
+            <Parameter Name="DateFin" Mode="In" Type="DateTime" />
+            <Parameter Name="Statut" Mode="In" Type="Boolean" />
+            <Parameter Name="PrixTotal" Mode="In" Type="String" />
+            <Parameter Name="ModePaiement" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateAdresse">
+            <Parameter Name="IdAdresse" Mode="In" Type="Int32" />
+            <Parameter Name="NomAdresse" Mode="In" Type="String" />
+            <Parameter Name="Numero" Mode="In" Type="String" />
+            <Parameter Name="Voie" Mode="In" Type="String" />
+            <Parameter Name="CodePostal" Mode="In" Type="String" />
+            <Parameter Name="Ville" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateClient" ReturnType="Collection(String)">
+            <Parameter Name="IdClient" Mode="In" Type="Int32" />
+            <Parameter Name="Nom" Mode="In" Type="String" />
+            <Parameter Name="Prenom" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Telephone" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="Boolean" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_GetAdresse_Result">
+          <Property Type="Int32" Name="IdAdresse" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Voie" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodePostal" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Ville" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAdressesClient_Result">
+          <Property Type="Int32" Name="IdAdresse" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Voie" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodePostal" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Ville" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="Int32" Name="IdAdresse1" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllHebergements_Result">
+          <Property Type="Int32" Name="IdHebergement" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int32" Name="IdAdresse" Nullable="true" />
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="Boolean" Name="Etat" Nullable="true" />
+          <Property Type="String" Name="NomAdresse" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Voie" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodePostal" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Ville" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomProprietaire" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Prenom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="sp_getClient_Result">
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Prenom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="12" />
+          <Property Type="Boolean" Name="Type" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetCommande_Result">
+          <Property Type="Int32" Name="IdReservation" Nullable="false" />
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="Int32" Name="IdHebergement" Nullable="false" />
+          <Property Type="DateTime" Name="DateReservation" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DateDebut" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DateFin" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Statut" Nullable="true" />
+          <Property Type="String" Name="PrixTotal" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ModePaiement" Nullable="true" />
+          <Property Type="Int32" Name="IdHebergement1" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int32" Name="IdAdresse" Nullable="true" />
+          <Property Type="Int32" Name="IdClient1" Nullable="false" />
+          <Property Type="Boolean" Name="Etat" Nullable="true" />
+          <Property Type="Int32" Name="idTypeLgt" Nullable="false" />
+          <Property Type="String" Name="NomLgt" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetFavoris_Result">
+          <Property Type="Int32" Name="IdHebergement" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int32" Name="IdAdresse" Nullable="true" />
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="Boolean" Name="Etat" Nullable="true" />
+          <Property Type="String" Name="NomAdresse" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Voie" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodePostal" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Ville" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomProprietaire" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Prenom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="sp_GetHebergement_Result">
+          <Property Type="Int32" Name="IdHebergement" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int32" Name="IdAdresse" Nullable="true" />
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="Boolean" Name="Etat" Nullable="true" />
+          <Property Type="String" Name="NomAdresse" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Voie" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodePostal" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Ville" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomProprietaire" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Prenom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="sp_GetHebergementProprietaire_Result">
+          <Property Type="Int32" Name="IdHebergement" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int32" Name="IdAdresse" Nullable="true" />
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="Boolean" Name="Etat" Nullable="true" />
+          <Property Type="String" Name="NomAdresse" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Voie" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodePostal" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Ville" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomProprietaire" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Prenom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="sp_GetHebergementRecherche_Result">
+          <Property Type="Int32" Name="IdHebergement" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int32" Name="IdAdresse" Nullable="true" />
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="Boolean" Name="Etat" Nullable="true" />
+          <Property Type="String" Name="NomAdresse" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Voie" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodePostal" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Ville" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomProprietaire" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Prenom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="sp_GetMessagesClient_Result">
+          <Property Type="Int32" Name="IdMessagerie" Nullable="false" />
+          <Property Type="Int32" Name="IdExpediteur" Nullable="false" />
+          <Property Type="Int32" Name="IdDestinataire" Nullable="false" />
+          <Property Type="String" Name="Message" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Statut" Nullable="false" />
+          <Property Type="Int32" Name="IdHebergement" Nullable="true" />
+          <Property Type="String" Name="Sujet" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdDestinataire1" Nullable="false" />
+          <Property Type="String" Name="NomDestinataire" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PrenomDestinataire" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmailDestinataire" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TelephoneDestinataire" Nullable="false" MaxLength="12" />
+          <Property Type="Boolean" Name="TypeDestinataire" Nullable="false" />
+          <Property Type="Int32" Name="IdExpediteur1" Nullable="false" />
+          <Property Type="String" Name="NomExpediteur" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PrenomExpediteur" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmailExpediteur" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TelephoneExpediteur" Nullable="false" MaxLength="12" />
+          <Property Type="Boolean" Name="TypeExpediteur" Nullable="false" />
+          <Property Type="Int32" Name="IdHebergement1" Nullable="false" />
+          <Property Type="String" Name="NomHebergement" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetUtilisateurId_Result">
+          <Property Type="Int32" Name="IdClient" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Prenom" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="12" />
+          <Property Type="Boolean" Name="Type" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MRLocaModelStoreContainer" CdmEntityContainer="MRLocaEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="MRLocaModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="IdAdmin" ColumnName="IdAdmin" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adresses">
+            <EntityTypeMapping TypeName="MRLocaModel.Adresse">
+              <MappingFragment StoreEntitySet="Adresse">
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Avis">
+            <EntityTypeMapping TypeName="MRLocaModel.Avi">
+              <MappingFragment StoreEntitySet="Avi">
+                <ScalarProperty Name="IdAvis" ColumnName="IdAvis" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="MRLocaModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departements">
+            <EntityTypeMapping TypeName="MRLocaModel.Departement">
+              <MappingFragment StoreEntitySet="Departement">
+                <ScalarProperty Name="IdDepartement" ColumnName="IdDepartement" />
+                <ScalarProperty Name="Departement_code" ColumnName="Departement_code" />
+                <ScalarProperty Name="Departement_nom" ColumnName="Departement_nom" />
+                <ScalarProperty Name="Departement_nom_uppercase" ColumnName="Departement_nom_uppercase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DispoHebergs">
+            <EntityTypeMapping TypeName="MRLocaModel.DispoHeberg">
+              <MappingFragment StoreEntitySet="DispoHeberg">
+                <ScalarProperty Name="IdDispo" ColumnName="IdDispo" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favoris">
+            <EntityTypeMapping TypeName="MRLocaModel.Favori">
+              <MappingFragment StoreEntitySet="Favori">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hebergements">
+            <EntityTypeMapping TypeName="MRLocaModel.Hebergement">
+              <MappingFragment StoreEntitySet="Hebergement">
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogSQLs">
+            <EntityTypeMapping TypeName="MRLocaModel.LogSQL">
+              <MappingFragment StoreEntitySet="LogSQL">
+                <ScalarProperty Name="IdLogSQL" ColumnName="IdLogSQL" />
+                <ScalarProperty Name="DateInsert" ColumnName="DateInsert" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messageries">
+            <EntityTypeMapping TypeName="MRLocaModel.Messagerie">
+              <MappingFragment StoreEntitySet="Messagerie">
+                <ScalarProperty Name="IdMessagerie" ColumnName="IdMessagerie" />
+                <ScalarProperty Name="IdExpediteur" ColumnName="IdExpediteur" />
+                <ScalarProperty Name="IdDestinataire" ColumnName="IdDestinataire" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Sujet" ColumnName="Sujet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModePaiements">
+            <EntityTypeMapping TypeName="MRLocaModel.ModePaiement">
+              <MappingFragment StoreEntitySet="ModePaiement">
+                <ScalarProperty Name="IdModePaiement" ColumnName="IdModePaiement" />
+                <ScalarProperty Name="NomModePaiement" ColumnName="NomModePaiement" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="MRLocaModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="IdReservation" ColumnName="IdReservation" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="DateReservation" ColumnName="DateReservation" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="PrixTotal" ColumnName="PrixTotal" />
+                <ScalarProperty Name="ModePaiement" ColumnName="ModePaiement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Saisons">
+            <EntityTypeMapping TypeName="MRLocaModel.Saison">
+              <MappingFragment StoreEntitySet="Saison">
+                <ScalarProperty Name="IdSaison" ColumnName="IdSaison" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MRLocaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeLgts">
+            <EntityTypeMapping TypeName="MRLocaModel.TypeLgt">
+              <MappingFragment StoreEntitySet="TypeLgt">
+                <ScalarProperty Name="idTypeLgt" ColumnName="idTypeLgt" />
+                <ScalarProperty Name="NomLgt" ColumnName="NomLgt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ClientAdresse" TypeName="MRLocaModel.ClientAdresse" StoreEntitySet="ClientAdresse">
+            <EndProperty Name="Adresse">
+              <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_AddFavori" FunctionName="MRLocaModel.Store.sp_AddFavori" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MRLocaModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MRLocaModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_DelAdresse" FunctionName="MRLocaModel.Store.sp_DelAdresse" />
+          <FunctionImportMapping FunctionImportName="sp_DelFavori" FunctionName="MRLocaModel.Store.sp_DelFavori" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MRLocaModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_GetAdresse" FunctionName="MRLocaModel.Store.sp_GetAdresse">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetAdresse_Result">
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAdressesClient" FunctionName="MRLocaModel.Store.sp_GetAdressesClient">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetAdressesClient_Result">
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdAdresse1" ColumnName="IdAdresse1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllHebergements" FunctionName="MRLocaModel.Store.sp_GetAllHebergements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetAllHebergements_Result">
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NomAdresse" ColumnName="NomAdresse" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="NomProprietaire" ColumnName="NomProprietaire" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_getClient" FunctionName="MRLocaModel.Store.sp_getClient">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_getClient_Result">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetCommande" FunctionName="MRLocaModel.Store.sp_GetCommande">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetCommande_Result">
+                <ScalarProperty Name="IdReservation" ColumnName="IdReservation" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="DateReservation" ColumnName="DateReservation" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="PrixTotal" ColumnName="PrixTotal" />
+                <ScalarProperty Name="ModePaiement" ColumnName="ModePaiement" />
+                <ScalarProperty Name="IdHebergement1" ColumnName="IdHebergement1" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="IdClient1" ColumnName="IdClient1" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="idTypeLgt" ColumnName="idTypeLgt" />
+                <ScalarProperty Name="NomLgt" ColumnName="NomLgt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetFavoris" FunctionName="MRLocaModel.Store.sp_GetFavoris">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetFavoris_Result">
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NomAdresse" ColumnName="NomAdresse" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="NomProprietaire" ColumnName="NomProprietaire" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetHebergement" FunctionName="MRLocaModel.Store.sp_GetHebergement">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetHebergement_Result">
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NomAdresse" ColumnName="NomAdresse" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="NomProprietaire" ColumnName="NomProprietaire" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetHebergementProprietaire" FunctionName="MRLocaModel.Store.sp_GetHebergementProprietaire">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetHebergementProprietaire_Result">
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NomAdresse" ColumnName="NomAdresse" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="NomProprietaire" ColumnName="NomProprietaire" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetHebergementRecherche" FunctionName="MRLocaModel.Store.sp_GetHebergementRecherche">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetHebergementRecherche_Result">
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAdresse" ColumnName="IdAdresse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NomAdresse" ColumnName="NomAdresse" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Voie" ColumnName="Voie" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="NomProprietaire" ColumnName="NomProprietaire" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetMessagesClient" FunctionName="MRLocaModel.Store.sp_GetMessagesClient">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetMessagesClient_Result">
+                <ScalarProperty Name="IdMessagerie" ColumnName="IdMessagerie" />
+                <ScalarProperty Name="IdExpediteur" ColumnName="IdExpediteur" />
+                <ScalarProperty Name="IdDestinataire" ColumnName="IdDestinataire" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="IdHebergement" ColumnName="IdHebergement" />
+                <ScalarProperty Name="Sujet" ColumnName="Sujet" />
+                <ScalarProperty Name="IdDestinataire1" ColumnName="IdDestinataire1" />
+                <ScalarProperty Name="NomDestinataire" ColumnName="NomDestinataire" />
+                <ScalarProperty Name="PrenomDestinataire" ColumnName="PrenomDestinataire" />
+                <ScalarProperty Name="EmailDestinataire" ColumnName="EmailDestinataire" />
+                <ScalarProperty Name="TelephoneDestinataire" ColumnName="TelephoneDestinataire" />
+                <ScalarProperty Name="TypeDestinataire" ColumnName="TypeDestinataire" />
+                <ScalarProperty Name="IdExpediteur1" ColumnName="IdExpediteur1" />
+                <ScalarProperty Name="NomExpediteur" ColumnName="NomExpediteur" />
+                <ScalarProperty Name="PrenomExpediteur" ColumnName="PrenomExpediteur" />
+                <ScalarProperty Name="EmailExpediteur" ColumnName="EmailExpediteur" />
+                <ScalarProperty Name="TelephoneExpediteur" ColumnName="TelephoneExpediteur" />
+                <ScalarProperty Name="TypeExpediteur" ColumnName="TypeExpediteur" />
+                <ScalarProperty Name="IdHebergement1" ColumnName="IdHebergement1" />
+                <ScalarProperty Name="NomHebergement" ColumnName="NomHebergement" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetUtilisateurId" FunctionName="MRLocaModel.Store.sp_GetUtilisateurId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_GetUtilisateurId_Result">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MRLocaModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MRLocaModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MRLocaModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsertAdresse" FunctionName="MRLocaModel.Store.sp_InsertAdresse" />
+          <FunctionImportMapping FunctionImportName="sp_InsertMessage" FunctionName="MRLocaModel.Store.sp_InsertMessage" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MRLocaModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_setAdresse" FunctionName="MRLocaModel.Store.sp_setAdresse" />
+          <FunctionImportMapping FunctionImportName="sp_setClient" FunctionName="MRLocaModel.Store.sp_setClient" />
+          <FunctionImportMapping FunctionImportName="sp_SetReservation" FunctionName="MRLocaModel.Store.sp_SetReservation" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateAdresse" FunctionName="MRLocaModel.Store.sp_UpdateAdresse" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateClient" FunctionName="MRLocaModel.Store.sp_UpdateClient" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MRLocaModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
