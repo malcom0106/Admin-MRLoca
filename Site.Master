@@ -15,6 +15,7 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="https://kit.fontawesome.com/b868aea368.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -44,6 +45,9 @@
             <a class="navbar-brand" href="#">
                 <img src="Images/logo.jpg" width="30" height="30" alt="">
             </a>
+            <span class="navbar-text">
+                <asp:Button CssClass="btn btn-danger" ID="btnDeconnection" runat="server" Text="LogOut" OnClick="btnDeconnection_Click"/><asp:Label ID="lblNom" runat="server" Text=""></asp:Label>
+            </span>
         </nav>
 
 

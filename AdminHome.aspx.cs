@@ -7,14 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace Admin_MRLoca
 {
-    public partial class AdminHome : System.Web.UI.Page
+    public partial class AdminHome : PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             Admin admin = (Admin)Session["Admin"];
             if(admin != null)
             {
-                this.lblAdmin.Text = admin.Login + ' ' + admin.Password; 
+                this.lblAdmin.Text = admin.NomAdmin + ' ' + admin.PrenomAdmin; 
             }
         }
     }

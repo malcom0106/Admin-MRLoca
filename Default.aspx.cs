@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Admin_MRLoca
 {
-    public partial class _Default : Page
+    public partial class _Default : PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +22,7 @@ namespace Admin_MRLoca
             {
                 Admin admin = null;
                 //On instencie le nouveau model de donnees ORM
-                MRLocaEntities mRLocaEntities = new MRLocaEntities();
+                //MRLocaEntities mRLocaEntities = new MRLocaEntities();
 
                 //Requete LINQ
                 var reqAdmin = from a in mRLocaEntities.Admins

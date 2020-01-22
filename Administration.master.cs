@@ -9,13 +9,12 @@ namespace Admin_MRLoca
 {
     public partial class Administration : System.Web.UI.MasterPage
     {
-        public Admin Administrateur { get; set; }
         protected void Page_Init(object sender, EventArgs e)
         {
             Admin admin = (Admin)Session["Admin"];
             if (admin != null)
             {
-                Administrateur = admin;
+                
             }
             else
             {
