@@ -6,7 +6,7 @@
             <div>
                 <div class="form-inline">
                     <label for="exampleInputEmail1" class="d-none d-sm-block col-12 col-md-4">Login : </label>
-                    <asp:TextBox ID="txtEmail" runat="server" placeholder="Entrer votre login" CssClass="form-control col-12 col-md-8" TextMode="SingleLine"></asp:TextBox>
+                    <asp:TextBox ID="txtLogin" runat="server" placeholder="Entrer votre login" CssClass="form-control col-12 col-md-8" TextMode="SingleLine"></asp:TextBox>
                     <asp:RequiredFieldValidator Display="None" ControlToValidate="txtEmail" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Veuillez Saisir un Email"></asp:RequiredFieldValidator>
     <%--                <asp:RegularExpressionValidator Display="None" ControlToValidate="txtEmail" ID="RegularExpressionValidator2" runat="server" ErrorMessage="Veuillez saisir un email correct" ValidationExpression="^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$"></asp:RegularExpressionValidator>--%>
                 </div>
