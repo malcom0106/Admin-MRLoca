@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Admin_MRLoca.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,8 +13,9 @@ namespace Admin_MRLoca
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {                
-                this.lsvHebergement.DataSource = mRLocaEntities.Hebergements.ToList();
+            {
+                DaoHebergement daoHebergement = new DaoHebergement();
+                this.lsvHebergement.DataSource = daoHebergement.GetHebergements();
                 this.lsvHebergement.DataBind();
             }    
             
@@ -23,25 +25,17 @@ namespace Admin_MRLoca
         {
             int idHebergement = Convert.ToInt32(((Button)sender).CommandArgument);
 
-            //Find recherche uniquement l'Id
-            Hebergement hebergement = mRLocaEntities.Hebergements.Find(idHebergement);
-
-            //Ecriture en Lambda en dessous             
-            //Hebergement hebergement = mRLocaEntities.Hebergements.Where(h => h.IdHebergement == idHebergement).First();
-            //Where(H tel que H.IdHebergement est égal à idHebergement)
-
-            hebergement.Etat = !(hebergement.Etat);
-            mRLocaEntities.SaveChanges();
-
-            this.lsvHebergement.DataSource = mRLocaEntities.Hebergements.ToList();
+            DaoHebergement daoHebergement = new DaoHebergement();
+            daoHebergement.ChangeStatutHebergement(idHebergement);
+            this.lsvHebergement.DataSource = daoHebergement.GetHebergements();
             this.lsvHebergement.DataBind();
         }        
 
         protected void lsvHebergement_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
-            this.DataPager1.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
-            MRLocaEntities mRLocaEntities = new MRLocaEntities();
-            this.lsvHebergement.DataSource = mRLocaEntities.Hebergements.ToList();
+            DaoHebergement daoHebergement = new DaoHebergement();
+            this.DataPager1.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);            
+            this.lsvHebergement.DataSource = daoHebergement.GetHebergements();
             this.lsvHebergement.DataBind();
         }
 
@@ -49,13 +43,14 @@ namespace Admin_MRLoca
         {
             if(e.Item.ItemType == ListViewItemType.DataItem)
             {
+                DataAccess dataAccess = new DataAccess();
                 Label Statut = (Label)e.Item.FindControl("lblStatut");
                 Button btnactive = (Button)e.Item.FindControl("btnActive");
                 Hebergement hebergement1 = (Hebergement)e.Item.DataItem;
                 
                 
                 //Find recherche uniquement l'Id
-                Hebergement hebergement = mRLocaEntities.Hebergements.Find(hebergement1.IdHebergement);
+                Hebergement hebergement = dataAccess.mRLocaEntities.Hebergements.Find(hebergement1.IdHebergement);
                 if (hebergement.Etat == true)
                 {
                     Statut.CssClass = "btn btn-success";

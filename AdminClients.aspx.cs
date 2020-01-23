@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Admin_MRLoca.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,21 +10,26 @@ namespace Admin_MRLoca
 {
     public partial class AdminClients : PageBase
     {
+        List<Client> clients;
         protected void Page_Load(object sender, EventArgs e)
         {
+            DaoClient daoClient = new DaoClient();
+            clients = daoClient.GetClients();
+
             if (!IsPostBack)
             {                
-                this.lsvClient.DataSource = mRLocaEntities.Clients.ToList();
+                this.lsvClient.DataSource = clients;
                 this.lsvClient.DataBind();
             }
         }
 
         protected void lsvClient_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
+            DataAccess dataAccess = new DataAccess();
             Button btnactivation = (Button)e.Item.FindControl("btnActive");
             Client client = (Client)e.Item.DataItem;
-            Client MonClient = mRLocaEntities.Clients.Find(client.IdClient);
-            if (MonClient.StatutClient == true)
+
+            if ((bool)client.StatutClient)
             {
                 btnactivation.CssClass = "btn btn-danger";
                 btnactivation.Text = "Désactivé";
@@ -37,19 +43,21 @@ namespace Admin_MRLoca
         }
 
         protected void lsvClient_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
-        {
+        {            
             this.dtpClients.SetPageProperties(e.StartRowIndex, e.MaximumRows,false);
-            this.lsvClient.DataSource = mRLocaEntities.Clients.ToList();
+
+            DaoClient daoClient = new DaoClient();
+            this.lsvClient.DataSource = daoClient.GetClients();
             this.lsvClient.DataBind();
         }
 
         protected void btnActive_Click(object sender, EventArgs e)
-        {
+        {            
             int idClient = Convert.ToInt32(((Button)sender).CommandArgument);
-            var client = mRLocaEntities.Clients.Find(idClient);
-            client.StatutClient = !client.StatutClient;
-            mRLocaEntities.SaveChanges();
-            this.lsvClient.DataSource = mRLocaEntities.Clients.ToList();
+            
+            DaoClient daoClient = new DaoClient();
+            daoClient.ChangeStatutClient(idClient);
+            this.lsvClient.DataSource = daoClient.GetClients();
             this.lsvClient.DataBind();
         }
     }

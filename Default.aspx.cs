@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Admin_MRLoca.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,20 +21,8 @@ namespace Admin_MRLoca
             string password = this.txtPassword.Text;
             if(!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
             {
-                Admin admin = null;
-                //On instencie le nouveau model de donnees ORM
-                //MRLocaEntities mRLocaEntities = new MRLocaEntities();
-
-                //Requete LINQ
-                var reqAdmin = from a in mRLocaEntities.Admins
-                               where a.Login == login && a.Password == password
-                               select a;
-                // Verification du conteneur
-                if(reqAdmin != null && reqAdmin.Count() > 0)
-                {
-                    // On recupere le premier element
-                    admin = reqAdmin.First();
-                }
+                DaoAdmin daoAdmin = new DaoAdmin();
+                Admin admin = daoAdmin.GetAdmin(login, password);
                 if(admin != null)
                 {
                     Session["Admin"] = admin;

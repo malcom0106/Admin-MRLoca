@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Admin_MRLoca.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,8 @@ namespace Admin_MRLoca
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Reservation> resa = mRLocaEntities.Reservations.ToList();
-            this.lsvReservations.DataSource = mRLocaEntities.Reservations.ToList();
+            DaoReservation daoReservation = new DaoReservation();
+            this.lsvReservations.DataSource = daoReservation.GetReservations();
             this.lsvReservations.DataBind();
         }
 
