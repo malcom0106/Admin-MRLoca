@@ -14,7 +14,8 @@ namespace Admin_MRLoca
             Admin admin = (Admin)Session["Admin"];
             if(admin != null)
             {
-                this.lblAdmin.Text = admin.NomAdmin + ' ' + admin.PrenomAdmin; 
+                this.lblAdmin.Text = "Bienvenue, " + admin.NomAdmin + ' ' + admin.PrenomAdmin;
+                this.lblAdmin.CssClass = "h3";
             }
         }
     }
