@@ -52,6 +52,8 @@ namespace Admin_MRLoca
                 Label Statut = (Label)e.Item.FindControl("lblStatut");
                 Button btnactive = (Button)e.Item.FindControl("btnActive");
                 Hebergement hebergement1 = (Hebergement)e.Item.DataItem;
+                
+                
                 //Find recherche uniquement l'Id
                 Hebergement hebergement = mRLocaEntities.Hebergements.Find(hebergement1.IdHebergement);
                 if (hebergement.Etat == true)

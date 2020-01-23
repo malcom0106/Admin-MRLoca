@@ -14,10 +14,9 @@
                                     <strong><%# Eval("Nom") %></strong>
                                 </div>
                                 <div class="p-2 bd-highlight"><%# Eval("Description") %></div>
-                                <div class="p-2 bd-highlight"><asp:Label ID="lblStatut" runat="server" CssClass=""></asp:Label></div>
-                                <%--<div class="p-2 bd-highlight"><%# Eval("Prix") %> Eur/Sem.</div>--%>                        
+                                <div class="p-2 bd-highlight"><asp:Label ID="lblStatut" runat="server" CssClass=""></asp:Label></div>                     
                                 <div id="btns" class="mt-auto p-2 bd-highlight">
-                                    <asp:Button CssClass="btn btn-primary" ID="btnActive" runat="server" Text="Activé" CommandArgument='<%# Eval("IdHebergement") %>' OnClick="btnActive_Click"/>
+                                    <asp:Button CssClass="btn btn-primary" ID="btnActive" runat="server" Text="Activé" CommandArgument='<%# Eval("IdHebergement") %>' OnClick="btnDesactive_Click"/>
                                 </div>
                             </div>
                         </div>

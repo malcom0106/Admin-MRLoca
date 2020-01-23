@@ -48,6 +48,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="Type" Type="bit" Nullable="false" />
+          <Property Name="StatutClient" Type="bit" />
         </EntityType>
         <EntityType Name="ClientAdresse">
           <Key>
@@ -618,6 +619,7 @@
           <NavigationProperty Name="Messageries1" Relationship="Self.FK_Messagerie_Client1" FromRole="Client" ToRole="Messagerie" />
           <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Client" FromRole="Client" ToRole="Reservation" />
           <NavigationProperty Name="Adresses" Relationship="Self.ClientAdresse" FromRole="Client" ToRole="Adresse" />
+          <Property Name="StatutClient" Type="Boolean" />
         </EntityType>
         <EntityType Name="Departement">
           <Key>
@@ -1348,6 +1350,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="MRLocaModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="StatutClient" ColumnName="StatutClient" />
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />

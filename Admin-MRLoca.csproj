@@ -114,8 +114,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminAvis.aspx" />
+    <Content Include="AdminClients.aspx" />
     <Content Include="AdminHebergements.aspx" />
     <Content Include="AdminHome.aspx" />
+    <Content Include="AdminMessagerie.aspx" />
+    <Content Include="AdminReservations.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -304,6 +308,20 @@
     <Compile Include="Admin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdminAvis.aspx.cs">
+      <DependentUpon>AdminAvis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminAvis.aspx.designer.cs">
+      <DependentUpon>AdminAvis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminClients.aspx.cs">
+      <DependentUpon>AdminClients.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminClients.aspx.designer.cs">
+      <DependentUpon>AdminClients.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminHebergements.aspx.cs">
       <DependentUpon>AdminHebergements.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -324,6 +342,20 @@
     </Compile>
     <Compile Include="Administration.master.designer.cs">
       <DependentUpon>Administration.master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMessagerie.aspx.cs">
+      <DependentUpon>AdminMessagerie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMessagerie.aspx.designer.cs">
+      <DependentUpon>AdminMessagerie.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminReservations.aspx.cs">
+      <DependentUpon>AdminReservations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminReservations.aspx.designer.cs">
+      <DependentUpon>AdminReservations.aspx</DependentUpon>
     </Compile>
     <Compile Include="Adresse.cs">
       <DependentUpon>Model1.tt</DependentUpon>
