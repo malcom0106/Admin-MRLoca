@@ -17,15 +17,23 @@ namespace Admin_MRLoca.Dao
         }
         public void ChangeStatutClient(int IdClient)
         {
-            //Find recherche uniquement l'Id
-            Client client = mRLocaEntities.Clients.Find(IdClient);
+            try
+            {
+                //Find recherche uniquement l'Id
+                Client client = mRLocaEntities.Clients.Find(IdClient);
 
-            //Ecriture en Lambda en dessous             
-            //Hebergement hebergement = mRLocaEntities.Hebergements.Where(h => h.IdHebergement == idHebergement).First();
-            //Where(H tel que H.IdHebergement est égal à idHebergement)
+                //Ecriture en Lambda en dessous             
+                //Hebergement hebergement = mRLocaEntities.Hebergements.Where(h => h.IdHebergement == idHebergement).First();
+                //Where(H tel que H.IdHebergement est égal à idHebergement)
 
-            client.StatutClient = !(client.StatutClient);
-            mRLocaEntities.SaveChanges();
+                client.StatutClient = !(client.StatutClient);
+                mRLocaEntities.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 }

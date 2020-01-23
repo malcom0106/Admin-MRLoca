@@ -10,7 +10,15 @@ namespace Admin_MRLoca.Dao
         public MRLocaEntities mRLocaEntities { get; set; }
         public DataAccess()
         {
-            mRLocaEntities = new MRLocaEntities();
+            try
+            {
+                mRLocaEntities = new MRLocaEntities();
+            } 
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 }

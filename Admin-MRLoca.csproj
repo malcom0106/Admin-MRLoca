@@ -370,6 +370,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Dao\DaoAdmin.cs" />
+    <Compile Include="Dao\DaoAvis.cs" />
     <Compile Include="Dao\DaoClient.cs" />
     <Compile Include="Dao\DaoHebergement.cs" />
     <Compile Include="Dao\DaoReservation.cs" />
