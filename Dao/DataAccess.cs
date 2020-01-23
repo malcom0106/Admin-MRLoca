@@ -17,6 +17,20 @@ namespace Admin_MRLoca.Dao
             catch(Exception ex)
             {
                 throw ex;
+            }            
+        }
+        public void AddErreur(Exception ex)
+        {
+            try
+            {
+                LogSQL logSQL = new LogSQL();
+                logSQL.DateInsert = DateTime.Now;
+                logSQL.Error = ex.Message;
+                mRLocaEntities.LogSQLs.Add(logSQL);
+            }
+            catch
+            {
+                string message = ex.Message;
             }
             
         }
