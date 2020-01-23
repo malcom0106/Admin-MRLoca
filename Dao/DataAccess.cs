@@ -25,7 +25,7 @@ namespace Admin_MRLoca.Dao
             {
                 LogSQL logSQL = new LogSQL();
                 logSQL.DateInsert = DateTime.Now;
-                logSQL.Error = ex.Message;
+                logSQL.Error = "Admin MR Loca : " + ex.Message;
                 mRLocaEntities.LogSQLs.Add(logSQL);
             }
             catch
